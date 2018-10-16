@@ -1,0 +1,6 @@
+Hóa đơn bàn :1
+Bánh kem --- SL: 1 --- Giá: 15.000,00 ₫/SP
+Bánh Flan --- SL: 1 --- Giá: 5.000,00 ₫/SP
+Check in: 6/29/2018 12:00:00 AM
+Check out: 6/29/2018 12:00:00 AM
+Tổng tiền: 20.000,00 ₫

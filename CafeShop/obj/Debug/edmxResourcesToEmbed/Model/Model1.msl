@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CafeShopModelStoreContainer" CdmEntityContainer="CafeShopEntities">
+    <EntitySetMapping Name="ACCOUNTs">
+      <EntityTypeMapping TypeName="CafeShopModel.ACCOUNT">
+        <MappingFragment StoreEntitySet="ACCOUNT">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="displayName" ColumnName="displayName" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BILLs">
+      <EntityTypeMapping TypeName="CafeShopModel.BILL">
+        <MappingFragment StoreEntitySet="BILL">
+          <ScalarProperty Name="billID" ColumnName="billID" />
+          <ScalarProperty Name="checkIn" ColumnName="checkIn" />
+          <ScalarProperty Name="checkOut" ColumnName="checkOut" />
+          <ScalarProperty Name="tableID" ColumnName="tableID" />
+          <ScalarProperty Name="billStatus" ColumnName="billStatus" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BILLINFOes">
+      <EntityTypeMapping TypeName="CafeShopModel.BILLINFO">
+        <MappingFragment StoreEntitySet="BILLINFO">
+          <ScalarProperty Name="billInfoID" ColumnName="billInfoID" />
+          <ScalarProperty Name="billID" ColumnName="billID" />
+          <ScalarProperty Name="foodID" ColumnName="foodID" />
+          <ScalarProperty Name="count" ColumnName="count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORies">
+      <EntityTypeMapping TypeName="CafeShopModel.CATEGORY">
+        <MappingFragment StoreEntitySet="CATEGORY">
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FOODs">
+      <EntityTypeMapping TypeName="CafeShopModel.FOOD">
+        <MappingFragment StoreEntitySet="FOOD">
+          <ScalarProperty Name="foodID" ColumnName="foodID" />
+          <ScalarProperty Name="foodName" ColumnName="foodName" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="foodPrice" ColumnName="foodPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MUSTERs">
+      <EntityTypeMapping TypeName="CafeShopModel.MUSTER">
+        <MappingFragment StoreEntitySet="MUSTER">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="displayName" ColumnName="displayName" />
+          <ScalarProperty Name="muster1" ColumnName="muster" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALARies">
+      <EntityTypeMapping TypeName="CafeShopModel.SALARY">
+        <MappingFragment StoreEntitySet="SALARY">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALARYINFOes">
+      <EntityTypeMapping TypeName="CafeShopModel.SALARYINFO">
+        <MappingFragment StoreEntitySet="SALARYINFO">
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CafeShopModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TABLELISTs">
+      <EntityTypeMapping TypeName="CafeShopModel.TABLELIST">
+        <MappingFragment StoreEntitySet="TABLELIST">
+          <ScalarProperty Name="tableID" ColumnName="tableID" />
+          <ScalarProperty Name="tableName" ColumnName="tableName" />
+          <ScalarProperty Name="tableStatus" ColumnName="tableStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

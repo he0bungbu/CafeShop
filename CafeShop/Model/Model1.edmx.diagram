@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cc99e09f0aa345eab8be31a2c465dfd3" Name="Diagram1">
+        <EntityTypeShape EntityType="CafeShopModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.BILL" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.BILLINFO" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.CATEGORY" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.FOOD" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.MUSTER" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.SALARY" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.SALARYINFO" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeShopModel.TABLELIST" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="CafeShopModel.FK__BILL__username__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__MUSTER__date__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__SALARY__coeffici__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__SALARYINF__userN__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__BILL__username__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__BILLINFO__count__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__BILLINFO__foodID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeShopModel.FK__FOOD__foodPrice__1DE57479" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

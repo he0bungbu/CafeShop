@@ -1,0 +1,91 @@
+﻿CREATE DATABASE CafeShop
+GO
+
+USE CafeShop
+GO
+
+--Account
+--TableList
+--Food
+--Category
+--Bill
+--BillInfo
+
+CREATE  TABLE ACCOUNT(
+	userName VARCHAR(100) PRIMARY KEY,
+	displayName NVARCHAR(100) NOT NULL DEFAULT N'Thành viên',
+	passWord VARCHAR(100) NOT NULL DEFAULT '0',
+	type INT NOT NULL DEFAULT '0' -- admin:1 && staff:0
+)
+GO
+
+CREATE TABLE TABLELIST(
+	tableID INT IDENTITY PRIMARY KEY,
+	tableName NVARCHAR(100) NOT NULL DEFAULT N'Bàn chưa đặt tên',
+	tableStatus NVARCHAR(100) NOT NULL DEFAULT N'Trống' -- Trống hoặc có người
+)
+GO
+
+CREATE TABLE CATEGORY(
+	categoryID INT IDENTITY PRIMARY KEY,
+	categoryName NVARCHAR(100) NOT NULL DEFAULT N'Danh mục chưa đặt tên' 
+)
+GO
+
+CREATE TABLE FOOD(
+	foodID INT IDENTITY PRIMARY KEY,
+	foodName NVARCHAR(100) NOT NULL DEFAULT N'Thức ăn hoặc đồ uống chưa đặt tên',
+	categoryID INT NOT NULL,
+	foodPrice FLOAT NOT NULL DEFAULT 0
+	FOREIGN KEY (categoryID) REFERENCES dbo.CATEGORY(categoryID)
+)
+GO
+
+CREATE TABLE BILL(
+	billID INT IDENTITY PRIMARY KEY,
+	checkIn DATE NOT NULL DEFAULT GETDATE(),
+	checkOut DATE,
+	tableID INT NOT NULL,
+	billStatus INT NOT NULL DEFAULT 0, -- Đã thanh toán:1 && Chưa thanh toán:0
+	username VARCHAR(100) NOT NULL
+	FOREIGN KEY (tableID) REFERENCES dbo.TABLELIST(tableID),
+	FOREIGN KEY (username) REFERENCES dbo.ACCOUNT(userName)
+)
+GO
+
+CREATE TABLE BILLINFO(
+	billInfoID INT IDENTITY PRIMARY KEY,
+	billID INT NOT NULL,
+	foodID INT NOT NULL,
+	count INT NOT NULL DEFAULT 0
+	FOREIGN KEY (billID) REFERENCES dbo.BILL(billID),
+	FOREIGN KEY (foodID) REFERENCES dbo.FOOD(foodID)
+)
+GO
+
+CREATE TABLE MUSTER(
+	userName VARCHAR(100) PRIMARY KEY,
+	displayName NVARCHAR(100) NOT NULL,
+	muster NVARCHAR(100) NOT NULL, -- Nghỉ -- Ca sáng -- Ca chiều -- Cả ngày
+	date DATE NOT NULL
+
+	FOREIGN KEY(userName) REFERENCES dbo.ACCOUNT(userName)
+)
+GO
+
+CREATE TABLE SALARY(
+	userName VARCHAR(100) PRIMARY KEY,
+	coefficient FLOAT NOT NULL -- Nghìn đồng/giờ
+	FOREIGN KEY(userName) REFERENCES dbo.ACCOUNT(userName)
+)
+GO
+
+CREATE TABLE SALARYINFO(
+	userName VARCHAR(100) PRIMARY KEY,
+	month INTEGER NOT NULL,
+	year INTEGER NOT NULL,
+	status INTEGER DEFAULT 0, -- 1:Đã thanh toán && 0:Chưa thanh toán
+	FOREIGN KEY(userName) REFERENCES dbo.ACCOUNT(userName)
+)
+GO
+

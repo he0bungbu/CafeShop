@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CafeShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="passWord" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BILL">
+          <Key>
+            <PropertyRef Name="billID" />
+          </Key>
+          <Property Name="billID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="checkIn" Type="date" Nullable="false" />
+          <Property Name="checkOut" Type="date" />
+          <Property Name="tableID" Type="int" Nullable="false" />
+          <Property Name="billStatus" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BILLINFO">
+          <Key>
+            <PropertyRef Name="billInfoID" />
+          </Key>
+          <Property Name="billInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="billID" Type="int" Nullable="false" />
+          <Property Name="foodID" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FOOD">
+          <Key>
+            <PropertyRef Name="foodID" />
+          </Key>
+          <Property Name="foodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="foodName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="foodPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MUSTER">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="muster" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALARY">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="coefficient" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALARYINFO">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="month" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TABLELIST">
+          <Key>
+            <PropertyRef Name="tableID" />
+          </Key>
+          <Property Name="tableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tableName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="tableStatus" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BILL__username__22AA2996">
+          <End Role="TABLELIST" Type="Self.TABLELIST" Multiplicity="1" />
+          <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLELIST">
+              <PropertyRef Name="tableID" />
+            </Principal>
+            <Dependent Role="BILL">
+              <PropertyRef Name="tableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL__username__239E4DCF">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="BILL">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILLINFO__count__276EDEB3">
+          <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+          <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL">
+              <PropertyRef Name="billID" />
+            </Principal>
+            <Dependent Role="BILLINFO">
+              <PropertyRef Name="billID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILLINFO__foodID__286302EC">
+          <End Role="FOOD" Type="Self.FOOD" Multiplicity="1" />
+          <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FOOD">
+              <PropertyRef Name="foodID" />
+            </Principal>
+            <Dependent Role="BILLINFO">
+              <PropertyRef Name="foodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOOD__foodPrice__1DE57479">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="FOOD" Type="Self.FOOD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="FOOD">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MUSTER__date__2B3F6F97">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="MUSTER" Type="Self.MUSTER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="MUSTER">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARY__coeffici__2E1BDC42">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="SALARY" Type="Self.SALARY" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="SALARY">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARYINF__userN__31EC6D26">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="SALARYINFO" Type="Self.SALARYINFO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="SALARYINFO">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CafeShopModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BILLINFO" EntityType="Self.BILLINFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FOOD" EntityType="Self.FOOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MUSTER" EntityType="Self.MUSTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALARY" EntityType="Self.SALARY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALARYINFO" EntityType="Self.SALARYINFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABLELIST" EntityType="Self.TABLELIST" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BILL__username__22AA2996" Association="Self.FK__BILL__username__22AA2996">
+            <End Role="TABLELIST" EntitySet="TABLELIST" />
+            <End Role="BILL" EntitySet="BILL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL__username__239E4DCF" Association="Self.FK__BILL__username__239E4DCF">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="BILL" EntitySet="BILL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILLINFO__count__276EDEB3" Association="Self.FK__BILLINFO__count__276EDEB3">
+            <End Role="BILL" EntitySet="BILL" />
+            <End Role="BILLINFO" EntitySet="BILLINFO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILLINFO__foodID__286302EC" Association="Self.FK__BILLINFO__foodID__286302EC">
+            <End Role="FOOD" EntitySet="FOOD" />
+            <End Role="BILLINFO" EntitySet="BILLINFO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOOD__foodPrice__1DE57479" Association="Self.FK__FOOD__foodPrice__1DE57479">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="FOOD" EntitySet="FOOD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MUSTER__date__2B3F6F97" Association="Self.FK__MUSTER__date__2B3F6F97">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="MUSTER" EntitySet="MUSTER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARY__coeffici__2E1BDC42" Association="Self.FK__SALARY__coeffici__2E1BDC42">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="SALARY" EntitySet="SALARY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARYINF__userN__31EC6D26" Association="Self.FK__SALARYINF__userN__31EC6D26">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="SALARYINFO" EntitySet="SALARYINFO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CafeShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="displayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passWord" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__username__239E4DCF" FromRole="ACCOUNT" ToRole="BILL" />
+          <NavigationProperty Name="MUSTER" Relationship="Self.FK__MUSTER__date__2B3F6F97" FromRole="ACCOUNT" ToRole="MUSTER" />
+          <NavigationProperty Name="SALARY" Relationship="Self.FK__SALARY__coeffici__2E1BDC42" FromRole="ACCOUNT" ToRole="SALARY" />
+          <NavigationProperty Name="SALARYINFO" Relationship="Self.FK__SALARYINF__userN__31EC6D26" FromRole="ACCOUNT" ToRole="SALARYINFO" />
+        </EntityType>
+        <EntityType Name="BILL">
+          <Key>
+            <PropertyRef Name="billID" />
+          </Key>
+          <Property Name="billID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="checkIn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkOut" Type="DateTime" Precision="0" />
+          <Property Name="tableID" Type="Int32" Nullable="false" />
+          <Property Name="billStatus" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__BILL__username__239E4DCF" FromRole="BILL" ToRole="ACCOUNT" />
+          <NavigationProperty Name="TABLELIST" Relationship="Self.FK__BILL__username__22AA2996" FromRole="BILL" ToRole="TABLELIST" />
+          <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__count__276EDEB3" FromRole="BILL" ToRole="BILLINFO" />
+        </EntityType>
+        <EntityType Name="BILLINFO">
+          <Key>
+            <PropertyRef Name="billInfoID" />
+          </Key>
+          <Property Name="billInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="billID" Type="Int32" Nullable="false" />
+          <Property Name="foodID" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BILL" Relationship="Self.FK__BILLINFO__count__276EDEB3" FromRole="BILLINFO" ToRole="BILL" />
+          <NavigationProperty Name="FOOD" Relationship="Self.FK__BILLINFO__foodID__286302EC" FromRole="BILLINFO" ToRole="FOOD" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FOODs" Relationship="Self.FK__FOOD__foodPrice__1DE57479" FromRole="CATEGORY" ToRole="FOOD" />
+        </EntityType>
+        <EntityType Name="FOOD">
+          <Key>
+            <PropertyRef Name="foodID" />
+          </Key>
+          <Property Name="foodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="foodName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="categoryID" Type="Int32" Nullable="false" />
+          <Property Name="foodPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__foodID__286302EC" FromRole="FOOD" ToRole="BILLINFO" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK__FOOD__foodPrice__1DE57479" FromRole="FOOD" ToRole="CATEGORY" />
+        </EntityType>
+        <EntityType Name="MUSTER">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="displayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="muster1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__MUSTER__date__2B3F6F97" FromRole="MUSTER" ToRole="ACCOUNT" />
+        </EntityType>
+        <EntityType Name="SALARY">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="coefficient" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__SALARY__coeffici__2E1BDC42" FromRole="SALARY" ToRole="ACCOUNT" />
+        </EntityType>
+        <EntityType Name="SALARYINFO">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="month" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__SALARYINF__userN__31EC6D26" FromRole="SALARYINFO" ToRole="ACCOUNT" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TABLELIST">
+          <Key>
+            <PropertyRef Name="tableID" />
+          </Key>
+          <Property Name="tableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tableName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tableStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__username__22AA2996" FromRole="TABLELIST" ToRole="BILL" />
+        </EntityType>
+        <Association Name="FK__BILL__username__239E4DCF">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="BILL">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MUSTER__date__2B3F6F97">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="MUSTER" Type="Self.MUSTER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="MUSTER">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARY__coeffici__2E1BDC42">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="SALARY" Type="Self.SALARY" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="SALARY">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALARYINF__userN__31EC6D26">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="SALARYINFO" Type="Self.SALARYINFO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="userName" />
+            </Principal>
+            <Dependent Role="SALARYINFO">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL__username__22AA2996">
+          <End Role="TABLELIST" Type="Self.TABLELIST" Multiplicity="1" />
+          <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLELIST">
+              <PropertyRef Name="tableID" />
+            </Principal>
+            <Dependent Role="BILL">
+              <PropertyRef Name="tableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILLINFO__count__276EDEB3">
+          <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+          <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL">
+              <PropertyRef Name="billID" />
+            </Principal>
+            <Dependent Role="BILLINFO">
+              <PropertyRef Name="billID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILLINFO__foodID__286302EC">
+          <End Role="FOOD" Type="Self.FOOD" Multiplicity="1" />
+          <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FOOD">
+              <PropertyRef Name="foodID" />
+            </Principal>
+            <Dependent Role="BILLINFO">
+              <PropertyRef Name="foodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOOD__foodPrice__1DE57479">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="FOOD" Type="Self.FOOD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="FOOD">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CafeShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
+          <EntitySet Name="BILLs" EntityType="Self.BILL" />
+          <EntitySet Name="BILLINFOes" EntityType="Self.BILLINFO" />
+          <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+          <EntitySet Name="FOODs" EntityType="Self.FOOD" />
+          <EntitySet Name="MUSTERs" EntityType="Self.MUSTER" />
+          <EntitySet Name="SALARies" EntityType="Self.SALARY" />
+          <EntitySet Name="SALARYINFOes" EntityType="Self.SALARYINFO" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TABLELISTs" EntityType="Self.TABLELIST" />
+          <AssociationSet Name="FK__BILL__username__239E4DCF" Association="Self.FK__BILL__username__239E4DCF">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="BILL" EntitySet="BILLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MUSTER__date__2B3F6F97" Association="Self.FK__MUSTER__date__2B3F6F97">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="MUSTER" EntitySet="MUSTERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARY__coeffici__2E1BDC42" Association="Self.FK__SALARY__coeffici__2E1BDC42">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="SALARY" EntitySet="SALARies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALARYINF__userN__31EC6D26" Association="Self.FK__SALARYINF__userN__31EC6D26">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="SALARYINFO" EntitySet="SALARYINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL__username__22AA2996" Association="Self.FK__BILL__username__22AA2996">
+            <End Role="TABLELIST" EntitySet="TABLELISTs" />
+            <End Role="BILL" EntitySet="BILLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILLINFO__count__276EDEB3" Association="Self.FK__BILLINFO__count__276EDEB3">
+            <End Role="BILL" EntitySet="BILLs" />
+            <End Role="BILLINFO" EntitySet="BILLINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILLINFO__foodID__286302EC" Association="Self.FK__BILLINFO__foodID__286302EC">
+            <End Role="FOOD" EntitySet="FOODs" />
+            <End Role="BILLINFO" EntitySet="BILLINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOOD__foodPrice__1DE57479" Association="Self.FK__FOOD__foodPrice__1DE57479">
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="FOOD" EntitySet="FOODs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CafeShopModelStoreContainer" CdmEntityContainer="CafeShopEntities">
+          <EntitySetMapping Name="ACCOUNTs">
+            <EntityTypeMapping TypeName="CafeShopModel.ACCOUNT">
+              <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILLs">
+            <EntityTypeMapping TypeName="CafeShopModel.BILL">
+              <MappingFragment StoreEntitySet="BILL">
+                <ScalarProperty Name="billID" ColumnName="billID" />
+                <ScalarProperty Name="checkIn" ColumnName="checkIn" />
+                <ScalarProperty Name="checkOut" ColumnName="checkOut" />
+                <ScalarProperty Name="tableID" ColumnName="tableID" />
+                <ScalarProperty Name="billStatus" ColumnName="billStatus" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILLINFOes">
+            <EntityTypeMapping TypeName="CafeShopModel.BILLINFO">
+              <MappingFragment StoreEntitySet="BILLINFO">
+                <ScalarProperty Name="billInfoID" ColumnName="billInfoID" />
+                <ScalarProperty Name="billID" ColumnName="billID" />
+                <ScalarProperty Name="foodID" ColumnName="foodID" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="CafeShopModel.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FOODs">
+            <EntityTypeMapping TypeName="CafeShopModel.FOOD">
+              <MappingFragment StoreEntitySet="FOOD">
+                <ScalarProperty Name="foodID" ColumnName="foodID" />
+                <ScalarProperty Name="foodName" ColumnName="foodName" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="foodPrice" ColumnName="foodPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MUSTERs">
+            <EntityTypeMapping TypeName="CafeShopModel.MUSTER">
+              <MappingFragment StoreEntitySet="MUSTER">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="muster1" ColumnName="muster" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALARies">
+            <EntityTypeMapping TypeName="CafeShopModel.SALARY">
+              <MappingFragment StoreEntitySet="SALARY">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALARYINFOes">
+            <EntityTypeMapping TypeName="CafeShopModel.SALARYINFO">
+              <MappingFragment StoreEntitySet="SALARYINFO">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CafeShopModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABLELISTs">
+            <EntityTypeMapping TypeName="CafeShopModel.TABLELIST">
+              <MappingFragment StoreEntitySet="TABLELIST">
+                <ScalarProperty Name="tableID" ColumnName="tableID" />
+                <ScalarProperty Name="tableName" ColumnName="tableName" />
+                <ScalarProperty Name="tableStatus" ColumnName="tableStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
